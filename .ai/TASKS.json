@@ -1,4 +1,6 @@
 {
-  "version": 1,
-  "tasks": []
+  "schema_version": 1,
+  "project": "MATRIX",
+  "tasks": [],
+  "notes": "The Orchestrator/Planner must populate this file during bootstrap."
 }
