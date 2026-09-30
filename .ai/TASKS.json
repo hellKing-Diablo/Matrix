@@ -6,7 +6,7 @@
       "id": "MATRIX-001",
       "title": "Bootstrap Python project and repository layout",
       "type": "foundation",
-      "status": "ready",
+      "status": "approved",
       "priority": "high",
       "dependencies": [],
       "owner_role": "coder",
@@ -36,7 +36,53 @@
       "architecture_refs": [
         "docs/matrix_v1_architecture/README.md#5-repository-shape",
         "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation"
-      ]
+      ],
+      "history": [
+        {
+          "at": "2026-09-30T04:52:29.415105Z",
+          "from": "ready",
+          "to": "in_progress",
+          "actor_role": "orchestrator"
+        },
+        {
+          "at": "2026-09-30T04:52:29.803583Z",
+          "from": "in_progress",
+          "to": "testing",
+          "actor_role": "orchestrator"
+        },
+        {
+          "at": "2026-09-30T04:56:51.215062Z",
+          "from": "testing",
+          "to": "review",
+          "actor_role": "orchestrator"
+        },
+        {
+          "at": "2026-09-30T05:11:53.322103Z",
+          "from": "review",
+          "to": "approved",
+          "actor_role": "reviewer"
+        }
+      ],
+      "tester": {
+        "verdict": "PASS",
+        "at": "2026-09-30T04:56:51.215062Z",
+        "evidence": [
+          "python3 -m compileall -q app tests",
+          "python3 -m unittest discover -s tests/unit -v",
+          "package import smoke test",
+          "git diff --check",
+          "MATRIX-001 acceptance criteria verified"
+        ]
+      },
+      "reviewer": {
+        "verdict": "APPROVE",
+        "at": "2026-09-30T05:11:53.322103Z",
+        "findings": {
+          "blocker": 0,
+          "major": 0,
+          "minor": 0
+        }
+      }
     },
     {
       "id": "MATRIX-002",
