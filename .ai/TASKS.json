@@ -1,6 +1,231 @@
 {
   "schema_version": 1,
   "project": "MATRIX",
-  "tasks": [],
-  "notes": "The Orchestrator/Planner must populate this file during bootstrap."
+  "tasks": [
+    {
+      "id": "MATRIX-001",
+      "title": "Bootstrap Python project and repository layout",
+      "type": "foundation",
+      "status": "ready",
+      "priority": "high",
+      "dependencies": [],
+      "owner_role": "coder",
+      "specialty": "backend",
+      "scope": [
+        "pyproject.toml",
+        "app/",
+        "tests/"
+      ],
+      "goal": "Create the Python project foundation and canonical MATRIX repository structure.",
+      "acceptance_criteria": [
+        "pyproject.toml defines the Python project and required development dependencies",
+        "app package structure matches the documented repository shape",
+        "tests directory contains unit, integration, and e2e locations",
+        "the project can be imported successfully"
+      ],
+      "forbidden_changes": [
+        "do not introduce microservices",
+        "do not add unapproved major external dependencies"
+      ],
+      "required_tests": [
+        "static",
+        "unit"
+      ],
+      "risk": "low",
+      "requires_human_approval": false,
+      "architecture_refs": [
+        "docs/matrix_v1_architecture/README.md#5-repository-shape",
+        "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation"
+      ]
+    },
+    {
+      "id": "MATRIX-002",
+      "title": "Configure linting, type checking, and Pytest",
+      "type": "tooling",
+      "status": "planned",
+      "priority": "high",
+      "dependencies": [
+        "MATRIX-001"
+      ],
+      "owner_role": "coder",
+      "specialty": "backend",
+      "scope": [
+        "pyproject.toml",
+        "tests/"
+      ],
+      "goal": "Establish the mandatory static-analysis and automated-test tooling.",
+      "acceptance_criteria": [
+        "Ruff is configured and passes",
+        "type checking is configured and passes",
+        "Pytest is configured and can execute the test suite"
+      ],
+      "forbidden_changes": [
+        "do not replace the documented Python stack",
+        "do not disable checks simply to make the gate pass"
+      ],
+      "required_tests": [
+        "static",
+        "unit"
+      ],
+      "risk": "low",
+      "requires_human_approval": false,
+      "architecture_refs": [
+        "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation",
+        "docs/matrix_v1_architecture/10_TESTING_AND_ACCEPTANCE.md"
+      ]
+    },
+    {
+      "id": "MATRIX-003",
+      "title": "Implement settings and structured logging foundation",
+      "type": "backend",
+      "status": "planned",
+      "priority": "high",
+      "dependencies": [
+        "MATRIX-001"
+      ],
+      "owner_role": "coder",
+      "specialty": "backend",
+      "scope": [
+        "app/core/",
+        ".env.example",
+        "tests/unit/"
+      ],
+      "goal": "Provide centralized application settings and structured logging for subsequent MATRIX components.",
+      "acceptance_criteria": [
+        "application settings load from environment configuration",
+        "safe defaults exist for local development",
+        "structured logging can be initialized by the application",
+        "unit tests cover settings behavior"
+      ],
+      "forbidden_changes": [
+        "do not commit secrets",
+        "do not introduce an alternate configuration platform"
+      ],
+      "required_tests": [
+        "unit",
+        "static"
+      ],
+      "risk": "low",
+      "requires_human_approval": false,
+      "architecture_refs": [
+        "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation",
+        "docs/matrix_v1_architecture/08_SECURITY_RELIABILITY.md"
+      ]
+    },
+    {
+      "id": "MATRIX-004",
+      "title": "Create FastAPI application and liveness endpoint",
+      "type": "backend",
+      "status": "planned",
+      "priority": "high",
+      "dependencies": [
+        "MATRIX-003"
+      ],
+      "owner_role": "coder",
+      "specialty": "backend",
+      "scope": [
+        "app/main.py",
+        "app/api/",
+        "tests/unit/",
+        "tests/integration/"
+      ],
+      "goal": "Create the FastAPI application foundation and documented liveness endpoint.",
+      "acceptance_criteria": [
+        "FastAPI application starts successfully",
+        "GET /health/live returns a successful response",
+        "automated tests cover the liveness endpoint"
+      ],
+      "forbidden_changes": [
+        "do not introduce a second web service",
+        "do not add product APIs outside this task"
+      ],
+      "required_tests": [
+        "unit",
+        "integration"
+      ],
+      "risk": "low",
+      "requires_human_approval": false,
+      "architecture_refs": [
+        "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation",
+        "docs/matrix_v1_architecture/04_API_CONTRACTS.md"
+      ]
+    },
+    {
+      "id": "MATRIX-005",
+      "title": "Add Docker and Compose development baseline",
+      "type": "devops",
+      "status": "planned",
+      "priority": "medium",
+      "dependencies": [
+        "MATRIX-004"
+      ],
+      "owner_role": "coder",
+      "specialty": "devops",
+      "scope": [
+        "Dockerfile",
+        "docker-compose.yml",
+        "docker/"
+      ],
+      "goal": "Provide the documented container baseline for local MATRIX development.",
+      "acceptance_criteria": [
+        "Docker image builds successfully",
+        "Compose configuration is valid",
+        "containerized API can expose the liveness endpoint"
+      ],
+      "forbidden_changes": [
+        "do not introduce Kubernetes",
+        "do not introduce additional production services"
+      ],
+      "required_tests": [
+        "integration"
+      ],
+      "risk": "low",
+      "requires_human_approval": false,
+      "architecture_refs": [
+        "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation",
+        "docs/matrix_v1_architecture/09_DEPLOYMENT.md"
+      ]
+    },
+    {
+      "id": "MATRIX-006",
+      "title": "Add continuous integration skeleton",
+      "type": "devops",
+      "status": "planned",
+      "priority": "medium",
+      "dependencies": [
+        "MATRIX-002",
+        "MATRIX-004",
+        "MATRIX-005"
+      ],
+      "owner_role": "coder",
+      "specialty": "devops",
+      "scope": [
+        ".github/workflows/",
+        "pyproject.toml"
+      ],
+      "goal": "Create the initial CI gate for linting, type checking, tests, and the Phase 0 application baseline.",
+      "acceptance_criteria": [
+        "CI runs Ruff",
+        "CI runs type checking",
+        "CI runs Pytest",
+        "CI fails when a required quality gate fails"
+      ],
+      "forbidden_changes": [
+        "do not configure production deployment",
+        "do not store credentials in workflow files"
+      ],
+      "required_tests": [
+        "static",
+        "unit",
+        "integration"
+      ],
+      "risk": "low",
+      "requires_human_approval": false,
+      "architecture_refs": [
+        "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation",
+        "docs/matrix_v1_architecture/10_TESTING_AND_ACCEPTANCE.md"
+      ]
+    }
+  ],
+  "notes": "Initial Planner bootstrap for the Phase 0 repository-foundation milestone. Later V1 phases remain governed by docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md and will be expanded after the autonomous development loop is proven."
 }
