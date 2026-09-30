@@ -6,7 +6,7 @@
       "id": "MATRIX-001",
       "title": "Bootstrap Python project and repository layout",
       "type": "foundation",
-      "status": "approved",
+      "status": "done",
       "priority": "high",
       "dependencies": [],
       "owner_role": "coder",
@@ -61,6 +61,12 @@
           "from": "review",
           "to": "approved",
           "actor_role": "reviewer"
+        },
+        {
+          "at": "2026-09-30T05:18:15.991662Z",
+          "from": "approved",
+          "to": "done",
+          "actor_role": "integrator"
         }
       ],
       "tester": {
@@ -82,13 +88,18 @@
           "major": 0,
           "minor": 0
         }
+      },
+      "integrator": {
+        "verdict": "PASS",
+        "at": "2026-09-30T05:18:15.991662Z",
+        "baseline": "develop"
       }
     },
     {
       "id": "MATRIX-002",
       "title": "Configure linting, type checking, and Pytest",
       "type": "tooling",
-      "status": "planned",
+      "status": "ready",
       "priority": "high",
       "dependencies": [
         "MATRIX-001"
@@ -118,13 +129,21 @@
       "architecture_refs": [
         "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation",
         "docs/matrix_v1_architecture/10_TESTING_AND_ACCEPTANCE.md"
+      ],
+      "history": [
+        {
+          "at": "2026-09-30T05:18:15.991662Z",
+          "from": "planned",
+          "to": "ready",
+          "actor_role": "integrator"
+        }
       ]
     },
     {
       "id": "MATRIX-003",
       "title": "Implement settings and structured logging foundation",
       "type": "backend",
-      "status": "planned",
+      "status": "ready",
       "priority": "high",
       "dependencies": [
         "MATRIX-001"
@@ -156,6 +175,14 @@
       "architecture_refs": [
         "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation",
         "docs/matrix_v1_architecture/08_SECURITY_RELIABILITY.md"
+      ],
+      "history": [
+        {
+          "at": "2026-09-30T05:18:15.991662Z",
+          "from": "planned",
+          "to": "ready",
+          "actor_role": "integrator"
+        }
       ]
     },
     {
