@@ -6,7 +6,7 @@
       "id": "MATRIX-001",
       "title": "Bootstrap Python project and repository layout",
       "type": "foundation",
-      "status": "ready",
+      "status": "testing",
       "priority": "high",
       "dependencies": [],
       "owner_role": "coder",
@@ -36,6 +36,20 @@
       "architecture_refs": [
         "docs/matrix_v1_architecture/README.md#5-repository-shape",
         "docs/matrix_v1_architecture/11_IMPLEMENTATION_ORDER.md#phase-0--repository-foundation"
+      ],
+      "history": [
+        {
+          "at": "2026-09-30T04:52:29.415105Z",
+          "from": "ready",
+          "to": "in_progress",
+          "actor_role": "orchestrator"
+        },
+        {
+          "at": "2026-09-30T04:52:29.803583Z",
+          "from": "in_progress",
+          "to": "testing",
+          "actor_role": "orchestrator"
+        }
       ]
     },
     {
